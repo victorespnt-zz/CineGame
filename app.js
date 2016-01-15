@@ -1,2 +1,2 @@
 // FICHIER PILOTE;
-var Quiz = new QuizView();
+var Game = new DuoGameView();

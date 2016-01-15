@@ -1,6 +1,6 @@
 var DuoHomeView = Backbone.View.extend({
 	
-	el: '#app',
+	el: '',
 
 	events: {
 

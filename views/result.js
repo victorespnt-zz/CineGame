@@ -1,6 +1,6 @@
 var DuoResultView = Backbone.View.extend({
 	
-	el: '#app',
+	el: '',
 
 	events: {
 

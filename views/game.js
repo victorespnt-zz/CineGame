@@ -9,6 +9,19 @@ var DuoGameView = Backbone.View.extend({
 
 	},
 
+	getPost: function(){
+    var that = this;
+    this.collection.fetch(
+    {
+        success: function () {
+             console.log(that.collection.toJSON());
+        },
+        error: function() {
+             console.log('Failed to fetch!');
+        }
+   });
+},
+
 	initialize : function() {
 		
 		
@@ -17,6 +30,6 @@ var DuoGameView = Backbone.View.extend({
 
 	render : function () {
 
-	},	
+	}
 });
 
