@@ -1,15 +1,11 @@
 // LA VUE
 
 
-var StudentListView = Backbone.View.extend({
+var DuoGameView = Backbone.View.extend({
 	
 	el: '#app',
 
 	events: {
-
-		'submit form': "addStudent",
-
-
 
 	},
 
@@ -20,13 +16,7 @@ var StudentListView = Backbone.View.extend({
 	},
 
 	render : function () {
-		
 
-	};
-
-
-	
-
-
+	},	
 });
 
