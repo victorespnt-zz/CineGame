@@ -1,6 +1,6 @@
 // LE MODEL
 
-var duo = Backbone.Model.extend({
+var Duo = Backbone.Model.extend({
 
 	defaults: {
 		actor: '',

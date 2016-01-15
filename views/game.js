@@ -16,7 +16,7 @@ var GameView = Backbone.View.extend({
 
 		this.DuoCollection = new DuoCollection();
 		this.DuoCollection.fetch();
-
+		this.game = new Game();
 		this.duo = this.pickNewDuo();
 
 
