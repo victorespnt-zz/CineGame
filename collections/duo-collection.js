@@ -1,6 +1,7 @@
 //LA COLLECTION
-	var DuoCollection = Backbone.Collection.extend({
-    model: duo,
+var DuoCollection = Backbone.Collection.extend({
+
+    model: Duo,
 
     url: "http://dcamilleri.com/wsf/api",
 
@@ -23,6 +24,4 @@
         // Là on est sur une piste pour récupérer le Json
     }
 
-    });
 });
-

@@ -104,7 +104,7 @@ var GameView = Backbone.View.extend({
 		$questionBox.append($questionBoxTemplate);
 
 
-	};
+	}
 
 
 

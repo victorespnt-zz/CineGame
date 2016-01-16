@@ -1,2 +1,2 @@
 // FICHIER PILOTE;
-var Game = new DuoGameView();
+var game = new GameView();
