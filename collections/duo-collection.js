@@ -3,7 +3,5 @@ var DuoCollection = Backbone.Collection.extend({
 
     model: Duo,
 
-    url: "data/movies.json",
-
-
+    url: "data/duos.json",
 });
