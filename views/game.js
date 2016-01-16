@@ -8,20 +8,17 @@ var GameView = Backbone.View.extend({
 	events: {
 
 		'click .answer': "onAnswer",
-
-
 	},
 
 	initialize : function() {
 
 		this.DuoCollection = new DuoCollection();
 		this.DuoCollection.fetch();
+		console.log(this.DuoCollection);
 		this.game = new Game();
 		this.duo = this.pickNewDuo();
 
-
 		this.render();
-
 
 	},
 
@@ -57,7 +54,7 @@ var GameView = Backbone.View.extend({
 
 		}
 
-		// TODO Save score in model (player.score)
+		// TODO Save score in model (game.score)
 		// TODO Save score in localStorage
 
 		// display next question
@@ -105,9 +102,4 @@ var GameView = Backbone.View.extend({
 
 
 	}
-
-
-
-
-
 });
