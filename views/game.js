@@ -26,7 +26,7 @@ var GameView = Backbone.View.extend({
 		var randomNumber = 1;
 
 		// TODO : Stocker dans une variable le duo choisi grâce au numero alétoire (this.DuoCollection.toJSON()[randomNumber])
-		console.log(this.DuoCollection.at(randomNumber));
+		// console.log(this.DuoCollection.at(randomNumber));
 
 		var duo = this.DuoCollection.at(1);
 
@@ -71,14 +71,14 @@ var GameView = Backbone.View.extend({
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
+					<hr>\
+					<div class="image col-md-6" style="background-image:url('+actor.image+')">\
+					<h3 class="actorName">'+actor.name+'</h3>\
+					</div>\
 					<div class="image col-md-6" style="background-image:url('+movie.poster+')">\
 						<h3 class="movieTitle">'+movie.title+'</h3>\
 					</div>\
-					<div class="col-md-6">\
-						<div class="image" style="background-image:url('+actor.image+')">\
-							<h3 class="actorName">'+actor.name+'</h3>\
-						</div>\
-					</div>\
+					<hr>\
 					<div class="answers">\
 						<a class="answer btn btn-lg btn-success" data-cid="'+duo.cid+'" data-answer="true" >YES</a>\
 						<a class="answer btn btn-lg btn-danger" data-cid="'+duo.cid+'" data-answer="false" >NO</a>\
@@ -96,8 +96,8 @@ var GameView = Backbone.View.extend({
 		$questionBoxTemplate = this.getQuestionBoxTemplate(duo);
 
 		$questionBox = this.$('#questionBox');
-		$questionBox.empty();
 
+		$questionBox.empty();
 		$questionBox.append($questionBoxTemplate);
 
 	}

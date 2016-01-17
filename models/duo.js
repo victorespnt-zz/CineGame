@@ -1,4 +1,3 @@
-// LE MODEL
 
 var Duo = Backbone.Model.extend({
 
