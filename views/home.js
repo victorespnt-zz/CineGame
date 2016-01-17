@@ -18,7 +18,7 @@ var HomeView = Backbone.View.extend({
 		var template = '\
 			<div class="panel panel-default">\
 				<div class="panel-body">\
-					<a href="/game" class="btn btn-lg btn-success">Play the game</a>\
+					<a href="#game" class="btn btn-lg btn-success">Play the game</a>\
 				</div>\
 			</div>\
 		';
