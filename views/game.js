@@ -71,12 +71,13 @@ var GameView = Backbone.View.extend({
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
-					<div class="image col-md-6" style="background-image=url('+movie.poster+')">\
-						<h3 class="movieTitle"></h3>\
+					<div class="image col-md-6" style="background-image:url('+movie.poster+')">\
+						<h3 class="movieTitle">'+movie.title+'</h3>\
 					</div>\
 					<div class="col-md-6">\
-						<div class="image" style="background-image=url('+actor.image+')"></div>\
-						<h3 class="actorName">'+actor.name+'</h3>\
+						<div class="image" style="background-image:url('+actor.image+')">\
+							<h3 class="actorName">'+actor.name+'</h3>\
+						</div>\
 					</div>\
 					<div class="answers">\
 						<a class="answer btn btn-lg btn-success" data-cid="'+duo.cid+'" data-answer="true" >YES</a>\
