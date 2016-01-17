@@ -8,22 +8,49 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+	<style>
+
+		#app {
+			max-width: 1100px;
+			width: 100%;
+			margin: 0 auto;
+		}
+	</style>
 </head>
 <body>
 
-	<!-- Div de mon application -->
-	<div id="app">
+	<header>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="collapse navbar-collapse" id="navbar-collapsed">
+					<ul class="nav navbar-nav">
+						<li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+					</ul>
 
-		<header>
-			<!-- TODO : faire le heaer à l'aide de bootstrap -->
-		</header>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>Romain<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="/">Profile</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div id="app">
 
 		<div id="questionBox">
 			<!-- template = game.js -->
 		</div>
 
+		<div id="homeBox">
+			<!-- template = home.js -->
+		</div>
+
 	</div>
-	<!-- Fermeture Div de mon application -->
 
 
 
