@@ -55,9 +55,9 @@ var GameView = Backbone.View.extend({
 		// test if right answer
 		if (answer == rightAnswer) {
 			this.game.set('score',this.game.get('score')+1);
-			this.won= true;
+			this.playerWon= true;
 		} else {
-			this.won= false;
+			this.playerWon= false;
 		}
 
 		// console.log(score);
@@ -68,7 +68,6 @@ var GameView = Backbone.View.extend({
 		previousDuos.push(duoCid);
 		this.game.set('duos', previousDuos);
 
-		// TODO Save score in model (game.score)
 		// TODO Save score in localStorage
 
 		// display next question
@@ -81,15 +80,12 @@ var GameView = Backbone.View.extend({
 		var actor = duo.toJSON().actor;
 		var score = this.game.toJSON().score;
 
-		var result = false;
-
-		if (this.won) {
-			var result = 'GOOD JOB !'
-		} else {
-			var result = 'NO !'
+		var result = '';
+		if (this.game.get('duos').length > 0) {
+			var result = this.playerWon ? 'GOOD JOB !' : 'NO !';
 		}
 
-		var resultMessage = result ? '<div class="alert alert-'+(this.won == true ? 'success' : 'danger')+'">'+result+'</div>' : '';
+		var resultMessage = result ? '<div class="alert alert-'+(this.playerWon == true ? 'success' : 'danger')+'">'+result+'</div>' : '';
 		var questionBoxTemplate = resultMessage+'\
 			<div class="panel panel-default">\
 				<div class="panel-body">\
@@ -123,9 +119,6 @@ var GameView = Backbone.View.extend({
 
 		$questionBox.empty();
 		$questionBox.append($questionBoxTemplate);
-
-		
-
 
 	}
 });
