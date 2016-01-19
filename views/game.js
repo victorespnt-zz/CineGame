@@ -26,11 +26,16 @@ var GameView = Backbone.View.extend({
 		//Génére un numero alétoire entre 0 et le nombre total de duos dans la collection (this.DuoCollection.length)
 		var randomNumber = Math.floor(Math.random() * (this.DuoCollection.length - 0));
 
-
 		// Stocke dans une variable le duo choisi grâce au numero alétoire
 		var duo = this.DuoCollection.at(randomNumber);
+		var previousDuos = this.game.get('duos');
 
-		return duo;
+		// if the duo is already in the array of previous duos : pick a new one
+		if (previousDuos.indexOf(duo.cid) == -1) {
+			return duo;
+		} else {
+			this.pickNewDuo();
+		}
 	},
 
 	onAnswer: function (e) {
@@ -58,7 +63,9 @@ var GameView = Backbone.View.extend({
 		// console.log(answer);
 		// console.log(rightAnswer);
 
-
+		var previousDuos = this.game.get('duos');
+		previousDuos.push(duoCid);
+		this.game.set('duos', previousDuos);
 
 		// TODO Save score in model (game.score)
 		// TODO Save score in localStorage
