@@ -22,13 +22,13 @@ var GameView = Backbone.View.extend({
 },
 
 	pickNewDuo: function () {
-		// TODO : Générer un numero alétoire entre 0 et le nombre total de duos dans la collection (this.DuoCollection.length)
-		var randomNumber = 1;
+		
+		//Génére un numero alétoire entre 0 et le nombre total de duos dans la collection (this.DuoCollection.length)
+		var randomNumber = Math.floor(Math.random() * (this.DuoCollection.length - 0));
+	
 
-		// TODO : Stocker dans une variable le duo choisi grâce au numero alétoire (this.DuoCollection.toJSON()[randomNumber])
-		// console.log(this.DuoCollection.at(randomNumber));
-
-		var duo = this.DuoCollection.at(1);
+		// Stocke dans une variable le duo choisi grâce au numero alétoire
+		var duo = this.DuoCollection.at(randomNumber);
 
 		return duo;
 	},
