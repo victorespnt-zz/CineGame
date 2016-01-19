@@ -22,14 +22,20 @@ var GameView = Backbone.View.extend({
 	},
 
 	pickNewDuo: function () {
-		
+
 		//Génére un numero alétoire entre 0 et le nombre total de duos dans la collection (this.DuoCollection.length)
 		var randomNumber = Math.floor(Math.random() * (this.DuoCollection.length - 0));
-	
+
 		// Stocke dans une variable le duo choisi grâce au numero alétoire
 		var duo = this.DuoCollection.at(randomNumber);
+		var previousDuos = this.game.get('duos');
 
-		return duo;
+		// if the duo is already in the array of previous duos : pick a new one
+		if (previousDuos.indexOf(duo.cid) == -1) {
+			return duo;
+		} else {
+			this.pickNewDuo();
+		}
 	},
 
 	onAnswer: function (e) {
@@ -44,21 +50,23 @@ var GameView = Backbone.View.extend({
 		var duo = this.DuoCollection.get(duoCid).toJSON();
 		// récupère la bonne réponse
 		var rightAnswer = duo.actor.isPresent.toString();
+		var score = this.game.get('score');
 
 		// test if right answer
 		if (answer == rightAnswer) {
 			this.game.set('score',this.game.get('score')+1);
 			this.won= true;
 		} else {
-			this.game.set('score',this.game.get('score')-1);
 			this.won= false;
 		}
 
-		// console.log(this.game.get('score'));
+		// console.log(score);
 		// console.log(answer);
 		// console.log(rightAnswer);
 
-
+		var previousDuos = this.game.get('duos');
+		previousDuos.push(duoCid);
+		this.game.set('duos', previousDuos);
 
 		// TODO Save score in model (game.score)
 		// TODO Save score in localStorage
@@ -71,6 +79,7 @@ var GameView = Backbone.View.extend({
 
 		var movie = duo.toJSON().movie;
 		var actor = duo.toJSON().actor;
+		var score = this.game.toJSON().score;
 
 		var result = false;
 
@@ -85,6 +94,7 @@ var GameView = Backbone.View.extend({
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
+					<p> Your score is '+score+'</p>\
 					<hr>\
 					<div class="image col-md-6" style="background-image:url('+actor.image+')">\
 					<h3 class="actorName">'+actor.name+'</h3>\
