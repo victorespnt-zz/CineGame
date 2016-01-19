@@ -66,12 +66,21 @@ var GameView = Backbone.View.extend({
 		previousDuos.push(duoCid);
 		this.game.set('duos', previousDuos);
 
+		// tester la longueur du tableau, si elle fait 10 c'est la fin du jeu
+		if (previousDuos.length == 10) {
+			var ResultView = new ResultView();
+		}
+
+
 		// TODO Save score in model (game.score)
 		// TODO Save score in localStorage
 
 		// display next question
 		this.render();
 	},
+
+	// tester la longueur du tableau, si elle fait 10 c'est la fin du jeu
+
 
 	getQuestionBoxTemplate: function (duo) {
 
