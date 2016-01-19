@@ -50,7 +50,8 @@ var GameView = Backbone.View.extend({
 		if (answer == rightAnswer) {
 			this.game.set('score',this.game.get('score')+1);
 		} else {
-			this.game.set('score',this.game.get('score')-1);
+		this.game.set('score',this.game.get('score')-1);
+
 		}
 
 		// console.log(this.game.get('score'));
