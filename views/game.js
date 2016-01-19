@@ -11,14 +11,34 @@ var GameView = Backbone.View.extend({
 	},
 
 	initialize : function() {
-		$('#homeBox').empty();
+		$('#app > div').empty();
 
 		var that = this;
-		this.game = new Game();
+
 		this.DuoCollection = new DuoCollection();
+		this.GamesCollection = new GamesCollection();
+		this.GamesCollection.fetch();
+
+		var previousGames = this.GamesCollection;
+		var allPreviousGamesAreFinished = true;
+
+		// try to find unfinished games in localstorage
+		this.GamesCollection.each(function(previousGame) {
+			var isFinished = previousGame.get('isFinished');
+			if (!isFinished) {
+				allPreviousGamesAreFinished = false;
+				that.game = previousGame;
+			}
+		});
+		// if no unfinished game was found, initiate a new game
+		if (allPreviousGamesAreFinished) {
+			this.game = new Game();
+			this.GamesCollection.add(this.game);
+		}
+
 		this.DuoCollection.fetch({
-		success: function(){that.render()},
-	  });
+			success: function(){that.render()},
+		});
 	},
 
 	pickNewDuo: function () {
@@ -55,25 +75,23 @@ var GameView = Backbone.View.extend({
 		// test if right answer
 		if (answer == rightAnswer) {
 			this.game.set('score',this.game.get('score')+1);
-			this.playerWon= true;
+			this.playerWon = true;
 		} else {
-			this.playerWon= false;
+			this.playerWon = false;
 		}
-
-		// console.log(score);
-		// console.log(answer);
-		// console.log(rightAnswer);
-
+		// get duos that were already played
 		var previousDuos = this.game.get('duos');
 		previousDuos.push(duoCid);
 		this.game.set('duos', previousDuos);
+		this.game.save();
 
 		// tester la longueur du tableau, si elle fait 10 c'est la fin du jeu
-		if (previousDuos.length == 10) {
-			var ResultView = new ResultView();
+		if (previousDuos.length >= 10) {
+			this.game.set('isFinished', true);
+			this.game.save();
+			// var ResultView = new ResultView();
+			alert('done');
 		}
-
-		// TODO Save score in localStorage
 
 		// display next question
 		this.render();
@@ -98,7 +116,7 @@ var GameView = Backbone.View.extend({
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
-					<p> Your score is '+score+'</p>\
+					<p> Your score is '+score+'/'+this.game.get("duos").length+'</p>\
 					<hr>\
 					<div class="image col-md-6" style="background-image:url('+actor.image+')">\
 					<h3 class="actorName">'+actor.name+'</h3>\
