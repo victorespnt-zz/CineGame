@@ -70,11 +70,13 @@ var GameView = Backbone.View.extend({
 
 		var movie = duo.toJSON().movie;
 		var actor = duo.toJSON().actor;
+		var score = this.game.toJSON().score;
 
 		var questionBoxTemplate = '\
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
+					<p> Your score is '+score+'</p>\
 					<hr>\
 					<div class="image col-md-6" style="background-image:url('+actor.image+')">\
 					<h3 class="actorName">'+actor.name+'</h3>\
