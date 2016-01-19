@@ -18,8 +18,8 @@ var GameView = Backbone.View.extend({
 		this.DuoCollection = new DuoCollection();
 		this.DuoCollection.fetch({
 		success: function(){that.render()},
-  });
-},
+	  });
+	},
 
 	pickNewDuo: function () {
 
@@ -54,8 +54,10 @@ var GameView = Backbone.View.extend({
 
 		// test if right answer
 		if (answer == rightAnswer) {
-			this.game.set('score',score+1);
+			this.game.set('score',this.game.get('score')+1);
+			this.won= true;
 		} else {
+			this.won= false;
 		}
 
 		// console.log(score);
@@ -88,7 +90,16 @@ var GameView = Backbone.View.extend({
 		var actor = duo.toJSON().actor;
 		var score = this.game.toJSON().score;
 
-		var questionBoxTemplate = '\
+		var result = false;
+
+		if (this.won) {
+			var result = 'GOOD JOB !'
+		} else {
+			var result = 'NO !'
+		}
+
+		var resultMessage = result ? '<div class="alert alert-'+(this.won == true ? 'success' : 'danger')+'">'+result+'</div>' : '';
+		var questionBoxTemplate = resultMessage+'\
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
@@ -121,6 +132,9 @@ var GameView = Backbone.View.extend({
 
 		$questionBox.empty();
 		$questionBox.append($questionBoxTemplate);
+
+		
+
 
 	}
 });
