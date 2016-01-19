@@ -18,15 +18,14 @@ var GameView = Backbone.View.extend({
 		this.DuoCollection = new DuoCollection();
 		this.DuoCollection.fetch({
 		success: function(){that.render()},
-  });
-},
+	  });
+	},
 
 	pickNewDuo: function () {
 		
 		//Génére un numero alétoire entre 0 et le nombre total de duos dans la collection (this.DuoCollection.length)
 		var randomNumber = Math.floor(Math.random() * (this.DuoCollection.length - 0));
 	
-
 		// Stocke dans une variable le duo choisi grâce au numero alétoire
 		var duo = this.DuoCollection.at(randomNumber);
 
@@ -49,8 +48,10 @@ var GameView = Backbone.View.extend({
 		// test if right answer
 		if (answer == rightAnswer) {
 			this.game.set('score',this.game.get('score')+1);
+			this.won= true;
 		} else {
 			this.game.set('score',this.game.get('score')-1);
+			this.won= false;
 		}
 
 		// console.log(this.game.get('score'));
@@ -71,7 +72,16 @@ var GameView = Backbone.View.extend({
 		var movie = duo.toJSON().movie;
 		var actor = duo.toJSON().actor;
 
-		var questionBoxTemplate = '\
+		var result = false;
+
+		if (this.won) {
+			var result = 'GOOD JOB !'
+		} else {
+			var result = 'NO !'
+		}
+
+		var resultMessage = result ? '<div class="alert alert-'+(this.won == true ? 'success' : 'danger')+'">'+result+'</div>' : '';
+		var questionBoxTemplate = resultMessage+'\
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
@@ -103,6 +113,9 @@ var GameView = Backbone.View.extend({
 
 		$questionBox.empty();
 		$questionBox.append($questionBoxTemplate);
+
+		
+
 
 	}
 });
