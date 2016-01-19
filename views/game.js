@@ -22,10 +22,10 @@ var GameView = Backbone.View.extend({
 },
 
 	pickNewDuo: function () {
-		
+
 		//Génére un numero alétoire entre 0 et le nombre total de duos dans la collection (this.DuoCollection.length)
 		var randomNumber = Math.floor(Math.random() * (this.DuoCollection.length - 0));
-	
+
 
 		// Stocke dans une variable le duo choisi grâce au numero alétoire
 		var duo = this.DuoCollection.at(randomNumber);
@@ -45,16 +45,15 @@ var GameView = Backbone.View.extend({
 		var duo = this.DuoCollection.get(duoCid).toJSON();
 		// récupère la bonne réponse
 		var rightAnswer = duo.actor.isPresent.toString();
+		var score = this.game.get('score');
 
 		// test if right answer
 		if (answer == rightAnswer) {
-			this.game.set('score',this.game.get('score')+1);
+			this.game.set('score',score+1);
 		} else {
-		this.game.set('score',this.game.get('score')-1);
-
 		}
 
-		// console.log(this.game.get('score'));
+		// console.log(score);
 		// console.log(answer);
 		// console.log(rightAnswer);
 
