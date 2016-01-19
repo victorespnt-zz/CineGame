@@ -1,4 +1,4 @@
-var DuoResultView = Backbone.View.extend({
+var ResultView = Backbone.View.extend({
 	
 	el: '',
 
