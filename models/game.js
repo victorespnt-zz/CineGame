@@ -1,7 +1,8 @@
 
 var Game = Backbone.Model.extend({
 
-	defaults: {
+	defaults: {:
+		mode: 'survival',
 		score: 0,
 		duos: [],
 		isFinished: false

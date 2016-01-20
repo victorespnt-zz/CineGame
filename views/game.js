@@ -85,7 +85,7 @@ var GameView = Backbone.View.extend({
 		this.game.set('duos', previousDuos);
 		this.game.save();
 
-		// tester la longueur du tableau, si elle fait 10 c'est la fin du jeu
+		// If table length >= 10, game is finished
 		if (previousDuos.length >= 10) {
 			this.game.set('isFinished', true);
 			this.game.save();
