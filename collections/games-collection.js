@@ -1,8 +1,7 @@
 //LA COLLECTION
-window.GamesCollection = Backbone.Collection.extend({
+var GamesCollection = Backbone.Collection.extend({
 
-  localStorage: new Backbone.LocalStorage("GamesCollection"),
-  model: Game,
- 
+	model: Game,
+	localStorage: new Backbone.LocalStorage("GamesCollection"),
 
 });
