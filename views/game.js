@@ -1,6 +1,3 @@
-// LA VUE
-
-
 var GameView = Backbone.View.extend({
 
 	el: '#app',
@@ -18,8 +15,6 @@ var GameView = Backbone.View.extend({
 		this.DuoCollection = new DuoCollection();
 		this.GamesCollection = new GamesCollection();
 		this.GamesCollection.fetch();
-
-		var previousGames = this.GamesCollection;
 		var allPreviousGamesAreFinished = true;
 
 		// try to find unfinished games in localstorage
@@ -74,7 +69,7 @@ var GameView = Backbone.View.extend({
 
 		// test if right answer
 		if (answer == rightAnswer) {
-			this.game.set('score',this.game.get('score')+1);
+			this.game.set('score',score+1);
 			this.playerWon = true;
 		} else {
 			this.playerWon = false;
@@ -89,16 +84,15 @@ var GameView = Backbone.View.extend({
 		if (previousDuos.length >= 10) {
 			this.game.set('isFinished', true);
 			this.game.save();
-			// var ResultView = new ResultView();
-			alert('done');
+			var resultView = new window.ResultView({
+				'game': this.game,
+			});
+			// alert('done');
 		}
 
 		// display next question
 		this.render();
 	},
-
-	// tester la longueur du tableau, si elle fait 10 c'est la fin du jeu
-
 
 	getQuestionBoxTemplate: function (duo) {
 
@@ -106,12 +100,11 @@ var GameView = Backbone.View.extend({
 		var actor = duo.toJSON().actor;
 		var score = this.game.toJSON().score;
 
-		var result = '';
 		if (this.game.get('duos').length > 0) {
-			var result = this.playerWon ? 'GOOD JOB !' : 'NO !';
+			var message = this.playerWon ? 'GOOD JOB !' : 'NO !';
 		}
 
-		var resultMessage = result ? '<div class="alert alert-'+(this.playerWon == true ? 'success' : 'danger')+'">'+result+'</div>' : '';
+		var resultMessage = message ? '<div class="alert alert-'+(this.playerWon == true ? 'success' : 'danger')+'">'+message+'</div>' : '';
 		var questionBoxTemplate = resultMessage+'\
 			<div class="panel panel-default">\
 				<div class="panel-body">\
