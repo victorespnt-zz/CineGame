@@ -3,7 +3,7 @@ var ResultView = Backbone.View.extend({
 	el: '#app',
 
 	events: {
-		
+
 	},
 
 	initialize : function(options) {
@@ -23,6 +23,7 @@ var ResultView = Backbone.View.extend({
 		template = '\
 			<h2>score = '+this.score+'</h2>\
 		';
+		return $(template);
 	},
 
 	render : function () {

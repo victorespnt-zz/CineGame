@@ -7,7 +7,7 @@ var GameView = Backbone.View.extend({
 		'click .answer': "onAnswer",
 	},
 
-	initialize : function() {
+	initialize : function(options) {
 		$('#app > div').empty();
 
 		var that = this;
@@ -20,17 +20,19 @@ var GameView = Backbone.View.extend({
 		// try to find unfinished games in localstorage
 		this.GamesCollection.each(function(previousGame) {
 			var isFinished = previousGame.get('isFinished');
-			if (!isFinished) {
+			// if an unfinished game that has the same mode is fount, continue it
+			if (!isFinished && previousGame.get('mode') == options.mode) {
 				allPreviousGamesAreFinished = false;
 				that.game = previousGame;
+				console.log('unfinished game');
 			}
 		});
 		// if no unfinished game was found, initiate a new game
 		if (allPreviousGamesAreFinished) {
-			this.game = new Game();
+			this.game = new Game({'mode': options.mode});
 			this.GamesCollection.add(this.game);
 		}
-
+		// console.log(this.game);
 		this.DuoCollection.fetch({
 			success: function(){that.render()},
 		});
@@ -66,32 +68,42 @@ var GameView = Backbone.View.extend({
 		// récupère la bonne réponse
 		var rightAnswer = duo.actor.isPresent.toString();
 		var score = this.game.get('score');
+		var mode = this.game.get('mode');
 
-		// test if right answer
-		if (answer == rightAnswer) {
-			this.game.set('score',score+1);
-			this.playerWon = true;
-		} else {
-			this.playerWon = false;
-		}
 		// get duos that were already played
 		var previousDuos = this.game.get('duos');
 		previousDuos.push(duoCid);
 		this.game.set('duos', previousDuos);
 		this.game.save();
 
+		// test if right answer
+		if (answer == rightAnswer) {
+			this.game.set('score',score+1);
+			this.game.save();
+			this.playerWon = true;
+		} else {
+			this.playerWon = false;
+			// if mode is survival. end the game
+			if (mode == 'survival') {
+				this.game.set('isFinished', true);
+				this.game.save();
+			}
+			// console.log('game should finish now');
+		}
+
 		// If table length >= 10, game is finished
-		if (previousDuos.length >= 10) {
+		if (previousDuos.length >= 10 && mode == '10points') {
 			this.game.set('isFinished', true);
 			this.game.save();
+		}
+
+		if (this.game.get('isFinished')) {
 			var resultView = new window.ResultView({
 				'game': this.game,
 			});
-			// alert('done');
+		} else {
+			this.render();
 		}
-
-		// display next question
-		this.render();
 	},
 
 	getQuestionBoxTemplate: function (duo) {
@@ -132,6 +144,7 @@ var GameView = Backbone.View.extend({
 	render : function () {
 
 		var duo = this.pickNewDuo();
+		console.log(duo);
 		$questionBoxTemplate = this.getQuestionBoxTemplate(duo);
 
 		$questionBox = this.$('#questionBox');

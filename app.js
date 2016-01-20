@@ -1,14 +1,12 @@
 var AppRouter = Backbone.Router.extend({
 	routes: {
 	    "": "index",
-	    "game": "game",
+	    "home": "index",
+	    "game/:mode": "game",
 	},
 
 	index: function () {
 		var home = new HomeView();
-	},
-	game: function () {
-		var game = new GameView();
 	},
 	game: function (mode) {
 		var game = new GameView({'mode':mode});
