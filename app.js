@@ -10,9 +10,6 @@ var AppRouter = Backbone.Router.extend({
 	game: function () {
 		var game = new GameView();
 	},
-	result: function () {
-		var result = new ResultView();
-	}
 
 });
 // Initiate the router

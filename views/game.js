@@ -79,7 +79,6 @@ var GameView = Backbone.View.extend({
 		this.render();
 	},
 
-	// tester la longueur du tableau, si elle fait 10 c'est la fin du jeu
 
 
 	getQuestionBoxTemplate: function (duo) {
