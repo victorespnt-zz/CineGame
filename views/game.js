@@ -41,17 +41,17 @@ var GameView = Backbone.View.extend({
 	pickNewDuo: function () {
 
 		//Génére un numero alétoire entre 0 et le nombre total de duos dans la collection (this.DuoCollection.length)
-		var randomNumber = Math.floor(Math.random() * (this.DuoCollection.length - 0));
+		var randomNumber = Math.floor(Math.random() * this.DuoCollection.length);
 
 		// Stocke dans une variable le duo choisi grâce au numero alétoire
 		var duo = this.DuoCollection.at(randomNumber);
 		var previousDuos = this.game.get('duos');
 
 		// if the duo is already in the array of previous duos : pick a new one
-		if (previousDuos.indexOf(duo.cid) == -1) {
+		if (duo && previousDuos.indexOf(duo.cid) == -1) {
 			return duo;
 		} else {
-			this.pickNewDuo();
+			return this.pickNewDuo();
 		}
 	},
 
@@ -72,8 +72,11 @@ var GameView = Backbone.View.extend({
 
 		// get duos that were already played
 		var previousDuos = this.game.get('duos');
+		var answers = this.game.get('answers');
 		previousDuos.push(duoCid);
+		answers.push(answer);
 		this.game.set('duos', previousDuos);
+		this.game.set('answers', answers);
 		this.game.save();
 
 		// test if right answer
@@ -107,7 +110,6 @@ var GameView = Backbone.View.extend({
 	},
 
 	getQuestionBoxTemplate: function (duo) {
-
 		var movie = duo.toJSON().movie;
 		var actor = duo.toJSON().actor;
 		var score = this.game.toJSON().score;
@@ -144,10 +146,10 @@ var GameView = Backbone.View.extend({
 	render : function () {
 
 		var duo = this.pickNewDuo();
-		console.log(duo);
-		$questionBoxTemplate = this.getQuestionBoxTemplate(duo);
 
-		$questionBox = this.$('#questionBox');
+		var $questionBoxTemplate = this.getQuestionBoxTemplate(duo);
+
+		var $questionBox = this.$('#questionBox');
 
 		$questionBox.empty();
 		$questionBox.append($questionBoxTemplate);

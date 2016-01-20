@@ -3,6 +3,7 @@ var AppRouter = Backbone.Router.extend({
 	    "": "index",
 	    "home": "index",
 	    "game/:mode": "game",
+		"profile": "profile",
 	},
 
 	index: function () {
@@ -10,6 +11,9 @@ var AppRouter = Backbone.Router.extend({
 	},
 	game: function (mode) {
 		var game = new GameView({'mode':mode});
+	},
+	profile: function () {
+		var profile = new ProfileView();
 	},
 
 });
