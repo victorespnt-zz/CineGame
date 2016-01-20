@@ -11,7 +11,7 @@ var AppRouter = Backbone.Router.extend({
 		var game = new GameView();
 	},
 	game: function (mode) {
-		var game = new GameView({‘mode’:mode});
+		var game = new GameView({'mode':mode});
 	},
 
 });
