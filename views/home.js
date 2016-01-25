@@ -7,6 +7,7 @@ var HomeView = Backbone.View.extend({
 	},
 
 	initialize : function() {
+		$('#app > div').empty();
 
 
 		this.render();

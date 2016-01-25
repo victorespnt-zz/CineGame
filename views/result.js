@@ -3,7 +3,6 @@ var ResultView = Backbone.View.extend({
 	el: '#app',
 
 	events: {
-
 	},
 
 	initialize : function(options) {
@@ -21,7 +20,9 @@ var ResultView = Backbone.View.extend({
 
 	getResultTemplate: function () {
 		template = '\
-			<h2>score = '+this.score+'</h2>\
+			<h2 style="color:white;">Your score is '+this.score+'</h2>\
+			<a href="#game/10points" class="btn btn-lg btn-success">Replay</a>\
+			<a href="#game/survival" class="btn btn-lg btn-success">Play survival</a>\
 		';
 		return $(template);
 	},

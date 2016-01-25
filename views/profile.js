@@ -7,7 +7,6 @@ var ProfileView = Backbone.View.extend({
 	},
 
 	initialize : function() {
-
 		$('#app > div').empty();
 
 		this.DuoCollection = new DuoCollection();
