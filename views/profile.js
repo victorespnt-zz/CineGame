@@ -32,7 +32,7 @@ var ProfileView = Backbone.View.extend({
 		return stats;
 	},
 
-	getHomeTemplate: function () {
+	getProfileTemplate: function () {
 		var gamesPlayed = this.GamesCollection.length;
 		var stats = this.getStats();
 		var rightAnswers = stats.rightAnswersCount;
@@ -40,6 +40,8 @@ var ProfileView = Backbone.View.extend({
 		var average = Math.round(rightAnswers * 100 / stats.duosCount);
 
 		this.GamesCollection.each(function(game) {
+			var message = game.mode == 'survival' ? game.score : game.score+'/'+game.duos.length;
+			var template = '<div class="panel panel-default col-md-3">'+message+'/'+'</div>'
 
 		});
 
@@ -58,17 +60,18 @@ var ProfileView = Backbone.View.extend({
 				</div>\
 			</div>\
 		';
+
 		var template = statsBox + movieListBox;
 		return $(template);
 	},
 
 	render : function () {
 
-		var $homeBox = this.$('#homeBox');
-		var $homeTemplate = this.getHomeTemplate();
+		var $profileBox = this.$('#profileBox');
+		var $profileTemplate = this.getProfileTemplate();
 
-		$homeBox.empty();
-		$homeBox.append($homeTemplate);
+		$profileBox.empty();
+		$profileBox.append($homeTemplate);
 
 	},
 });
