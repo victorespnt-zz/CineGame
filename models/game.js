@@ -1,4 +1,3 @@
-
 var Game = Backbone.Model.extend({
 
 	defaults: {
@@ -8,5 +7,4 @@ var Game = Backbone.Model.extend({
 		answers: [],
 		isFinished: false,
 	},
-
 });

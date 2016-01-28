@@ -1,4 +1,3 @@
-//LA COLLECTION
 var GamesCollection = Backbone.Collection.extend({
 
 	model: Game,

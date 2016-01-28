@@ -3,13 +3,11 @@ var GameView = Backbone.View.extend({
 	el: '#app',
 
 	events: {
-
 		'click .answer': "onAnswer",
 	},
 
 	initialize : function(options) {
 		$('#app > div').empty();
-
 		var that = this;
 
 		this.DuoCollection = new DuoCollection();
@@ -24,14 +22,15 @@ var GameView = Backbone.View.extend({
 			if (!isFinished && previousGame.get('mode') == options.mode) {
 				allPreviousGamesAreFinished = false;
 				that.game = previousGame;
-				console.log('unfinished game');
 			}
 		});
+
 		// if no unfinished game was found, initiate a new game
 		if (allPreviousGamesAreFinished) {
 			this.game = new Game({'mode': options.mode});
 			this.GamesCollection.add(this.game);
 		}
+
 		// console.log(this.game);
 		this.DuoCollection.fetch({
 			success: function(){that.render()},

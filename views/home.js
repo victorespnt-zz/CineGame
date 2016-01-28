@@ -9,18 +9,17 @@ var HomeView = Backbone.View.extend({
 	initialize : function() {
 		$('#app > div').empty();
 
-
 		this.render();
-
-
 	},
 
 	getHomeTemplate: function () {
 		var template = '\
-			<div class="panel panel-default">\
+			<div class="panel panel-default col-md-8 col-md-offset-2">\
 				<div class="panel-body">\
-					<a href="#game/survival" class="btn btn-lg btn-success">Play survival mode</a>\
-					<a href="#game/10points" class="btn btn-lg btn-success">Play in 10 points</a>\
+					<h2 class="text-center">Welcome to CineGame<br><small>How much do you know about movies ?</small></h2>\
+					<hr>\
+					<a href="#game/survival" class="btn btn-lg btn-success col-md-2 col-md-offset-3">Play survival mode</a>\
+					<a href="#game/10points" class="btn btn-lg btn-success col-md-2 col-md-offset-1">Play in 10 points</a>\
 				</div>\
 			</div>\
 		';
