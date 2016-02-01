@@ -18,8 +18,8 @@ var HomeView = Backbone.View.extend({
 				<div class="panel-body">\
 					<h2 class="text-center">Welcome to CineGame<br><small>How much do you know about movies ?</small></h2>\
 					<hr>\
-					<a href="#game/survival" class="btn btn-lg btn-success col-md-2 col-md-offset-3">Play survival mode</a>\
-					<a href="#game/10points" class="btn btn-lg btn-success col-md-2 col-md-offset-1">Play in 10 points</a>\
+					<a href="#game/survival" class="btn btn-lg btn-success col-md-5">Play survival mode</a>\
+					<a href="#game/10points" class="btn btn-lg btn-success col-md-5 col-md-offset-2">Play in 10 points</a>\
 				</div>\
 			</div>\
 		';
