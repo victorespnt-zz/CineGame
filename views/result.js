@@ -8,6 +8,9 @@ var ResultView = Backbone.View.extend({
 	initialize : function(options) {
 		$('#app > div').empty();
 
+		this.GamesCollection = new GamesCollection();
+		this.GamesCollection.fetch();
+
 		this.game = options.game;
 		// console.log(this.game);
 
@@ -18,11 +21,39 @@ var ResultView = Backbone.View.extend({
 
 	},
 
+	getStats: function () {
+		var stats = {};
+		stats.duosCount = 0;
+		stats.rightAnswersCount = 0;
+		this.GamesCollection.each(function(game) {
+			var duos = game.get('duos');
+			stats.duosCount = stats.duosCount + duos.length;
+
+			var score = game.get('score');
+			stats.rightAnswersCount = stats.rightAnswersCount + score;
+		});
+		stats.wrongAnswersCount = stats.duosCount - stats.rightAnswersCount;
+		return stats;
+	},
+
 	getResultTemplate: function () {
-		template = '\
+
+		var gamesPlayed = this.GamesCollection.length;
+		var stats = this.getStats();
+		var rightAnswers = stats.rightAnswersCount;
+		var wrongAnswers = stats.wrongAnswersCount;
+		var average = Math.round(rightAnswers * 100 / stats.duosCount);
+
+		var template = '\
 			<h2>Your final score is '+this.score+'</h2>\
-			<a href="#game/10points" class="btn btn-lg btn-success">Replay</a>\
-			<a href="#game/survival" class="btn btn-lg btn-success">Play survival</a>\
+			<hr>\
+			<div class="panel panel-default">\
+				<div class="panel-body">\
+					<h2>You played '+gamesPlayed+' games !</h2>\
+					<h2>Your average is '+average+'% of good answers !</h2>\
+					<div class="movieList"></div>\
+				</div>\
+			</div>\
 		';
 		return $(template);
 	},

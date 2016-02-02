@@ -111,18 +111,18 @@ var GameView = Backbone.View.extend({
 	getQuestionBoxTemplate: function (duo) {
 		var movie = duo.toJSON().movie;
 		var actor = duo.toJSON().actor;
-		var score = this.game.toJSON().score;
+		var score = this.game.get('mode') == '10points' ? this.game.toJSON().score+'/'+this.game.get("duos").length : this.game.toJSON().score;
 
 		if (this.game.get('duos').length > 0) {
 			var message = this.playerWon ? 'GOOD JOB !' : 'NO !';
 		}
 
 		var resultMessage = message ? '<div class="alert alert-'+(this.playerWon == true ? 'success' : 'danger')+'">'+message+'</div>' : '';
-		var questionBoxTemplate = resultMessage+'\
+		var questionBoxTemplate = '\
 			<div class="panel panel-default">\
 				<div class="panel-body">\
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
-					<p> Your score is '+score+'/'+this.game.get("duos").length+'</p>\
+					<p> Your score is '+score+'</p>\
 					<hr>\
 					<div class="text-center col-md-6"><img src="'+actor.image+'">\
 					     <h3 class="actorName">'+actor.name+'</h3>\
@@ -141,7 +141,7 @@ var GameView = Backbone.View.extend({
 			</div>\
 		';
 
-		return $(questionBoxTemplate);
+		return $(resultMessage + questionBoxTemplate);
 	},
 
 	render : function () {
