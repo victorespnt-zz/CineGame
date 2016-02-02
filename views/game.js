@@ -124,17 +124,18 @@ var GameView = Backbone.View.extend({
 					<h2>Was '+actor.name+' in '+movie.title+' ?</h2>\
 					<p> Your score is '+score+'/'+this.game.get("duos").length+'</p>\
 					<hr>\
-					<div class="image col-md-6" style="background-image:url('+actor.image+')">\
-					<h3 class="actorName">'+actor.name+'</h3>\
+					<div class="text-center col-md-6"><img src="'+actor.image+'">\
+					     <h3 class="actorName">'+actor.name+'</h3>\
 					</div>\
-					<div class="image col-md-6" style="background-image:url('+movie.poster+')">\
-						<h3 class="movieTitle">'+movie.title+'</h3>\
+					<div class="text-center col-md-6"><img src="'+movie.poster+'">\
+						 <h3 class="movieTitle">'+movie.title+'</h3>\
 					</div>\
-					<hr>\
+					<BR CLEAR="all">\
+					<BR CLEAR="all">\
 					<div class="answers">\
-						</br>\
-						<a class="answer btn btn-lg btn-success" data-cid="'+duo.cid+'" data-answer="true" >YES</a>\
-						<a class="answer btn btn-lg btn-danger" data-cid="'+duo.cid+'" data-answer="false" >NO</a>\
+						<button type="button" class="answer btn btn-default btn-lg btn-block" data-cid="'+duo.cid+'" data-answer="true" style="color:green;" >YES</button>\
+						<BR CLEAR="all">\
+						<button type="button" class="answer btn btn-default btn-lg btn-block" data-cid="'+duo.cid+'" data-answer="false" style="color:red" >NO</button>\
 					</div>\
 				</div>\
 			</div>\

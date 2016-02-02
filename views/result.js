@@ -20,7 +20,7 @@ var ResultView = Backbone.View.extend({
 
 	getResultTemplate: function () {
 		template = '\
-			<h2 style="color:white;">Your score is '+this.score+'</h2>\
+			<h2>Your final score is '+this.score+'</h2>\
 			<a href="#game/10points" class="btn btn-lg btn-success">Replay</a>\
 			<a href="#game/survival" class="btn btn-lg btn-success">Play survival</a>\
 		';
