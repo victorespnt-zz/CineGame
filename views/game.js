@@ -132,6 +132,7 @@ var GameView = Backbone.View.extend({
 					</div>\
 					<hr>\
 					<div class="answers">\
+						</br>\
 						<a class="answer btn btn-lg btn-success" data-cid="'+duo.cid+'" data-answer="true" >YES</a>\
 						<a class="answer btn btn-lg btn-danger" data-cid="'+duo.cid+'" data-answer="false" >NO</a>\
 					</div>\
